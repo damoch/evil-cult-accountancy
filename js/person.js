@@ -14,18 +14,24 @@ function Person(){
         surname : "",
         age : 0,
         dailyCost : 0,
-        profession : Profession.None
+        profession : Profession.None,
+        isHungry : function(){return this.daysHungry > 0;},
+        daysHungry : 0, 
+        worthForGods : 0
     };
 };
 
-function Person(nam, surnam, ag, dailyC, prof){
+function Person(nam, surnam, ag, dailyC, prof, worth){
     return {
         id : ID++,
         name : nam,
         surname : surnam,
         age : ag,
         dailyCost : dailyC,
-        profession : prof
+        profession : prof,
+        isHungry : function(){return this.daysHungry > 0;},
+        daysHungry : 0,
+        worthForGods : worth
     };
 }
 
