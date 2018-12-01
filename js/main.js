@@ -2,6 +2,7 @@ var satisfactionProgressBar;
 var moneyField;
 var dayField;
 var weekField;
+var sacrificesLeftField;
 
 var selectSacrifice;
 
@@ -16,8 +17,9 @@ function init(){
     moneyField = document.getElementById("moneyField");
     dayField = document.getElementById("day");
     weekField = document.getElementById("week");
+    sacrificesLeftField = document.getElementById("sacrificesLeftField");
 
-    GameData.godsSacrificesDemand = Math.floor(Math.random(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK));
+    GameData.godsSacrificesDemand = getRndInteger(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK);
     GameData.money = Rules.STARTING_MONEY;
 
     refreshSacrifices();
@@ -29,6 +31,7 @@ function updateOperationStatus(){
     moneyField.textContent = GameData.money;
     dayField.textContent = GameData.day;
     weekField.textContent = GameData.week;
+    sacrificesLeftField.textContent = GameData.godsSacrificesDemand
 }
 
 function refreshSacrifices(){
@@ -75,7 +78,7 @@ function nextDay(){
     }
     
     GameData.godsSatisfaction -= Rules.GODS_SATISFACTION_DAILY_DROP;
-    
+
     if(GameData.godsSatisfaction < Rules.GODS_SATISFACTION_LOWEST){
         GameData.godsSatisfaction = Rules.GODS_SATISFACTION_LOWEST;
     }
@@ -97,7 +100,7 @@ function weeklyEvent(){
     else{
         GameData.godsSatisfaction += Rules.SACRIFICES_QUOTA_MET_PRIZE;
     }
-    GameData.godsSacrificesDemand = Math.floor(Math.random(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK));
+    GameData.godsSacrificesDemand = getRndInteger(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK);
 }
 
 function feedVictims(){
@@ -116,5 +119,9 @@ function feedVictims(){
 }
 
 function punishPlayer(){
-    alert("Gods anger will fall upon you!");
+    //alert("Gods anger will fall upon you!");
+}
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min) ) + min;
 }
