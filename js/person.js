@@ -3,7 +3,6 @@ var ID = 0;
 Profession = {
     Speaker : "Speaker",
     Henchman : "Henchman",
-    Hangman : "Hangman",
     None : "None"
 };
 

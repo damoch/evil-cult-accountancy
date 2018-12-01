@@ -4,9 +4,13 @@ GameData = {
         Person("Dwilght", "Shrute", 35, 11, Profession.None, 17),
     ],
 
-    godsSatisfaction : 50,
+    godsSatisfaction : Rules.STARTING_GODS_SATISFACTION,
 
-    godsSacrificesDemand : 4,
+    godsSacrificesDemand : Rules.MINIMUM_SACRIFICES_FOR_WEEK,
+    money : Rules.STARTING_MONEY,
+    day : 1,
+    week : 1,
+
 
 }
 
