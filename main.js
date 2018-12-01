@@ -21,7 +21,7 @@ function init(){
 
     GameData.godsSacrificesDemand = getRndInteger(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK);
     GameData.money = Rules.STARTING_MONEY;
-    generateRandomPerson();
+
     refreshSacrifices();
     updateSatisfactionSlider();
     updateOperationStatus();
@@ -120,4 +120,8 @@ function feedVictims(){
 
 function punishPlayer(){
     //alert("Gods anger will fall upon you!");
+}
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min) ) + min;
 }
