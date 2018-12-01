@@ -12,6 +12,12 @@ const Rules = {
 
     STARTING_MONEY : 100, 
     STARTING_GODS_SATISFACTION : 50,
+    STARTING_PRISONERS_COUNT : 5,
+    STARTING_HENCHMEN_COUNT : 3,
+    STARTING_PRIESTS_COUNT : 2,
+
+    STARTING_DAY : 1,
+    STARTING_WEEK : 1,
 
     SACRIFICES_QUOTA_NOT_MET_PENALTY : 20,
     SACRIFICES_QUOTA_MET_PRIZE : 30,
@@ -24,5 +30,6 @@ const Rules = {
     MINIMUM_GODS_SATISFACTION : 10,
     GODS_SATISFACTION_DAILY_DROP : 10,
 
-    
+    MAX_MONEY_FOR_EVERY_EVIL_WORD_IN_SPEECH : 10,
+    EVIL_WORDS : ["evil", "satan", "domination", "curse", "kill", "demon", "cult", "bad", "villain", "empire", "hell", "follower", "mindless", "stupid"],
 }

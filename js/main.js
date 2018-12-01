@@ -3,10 +3,12 @@ var moneyField;
 var dayField;
 var weekField;
 var sacrificesLeftField;
+var speechTextArea;
 
 var selectSacrifice;
+var priestSelect;
 
-var victimSeparationChar = ':';
+var idOfPersonSeparator = ':';
 var hungryText = "(hungry)";
 
 var daysToWeek = 7;
@@ -18,13 +20,19 @@ function init(){
     dayField = document.getElementById("day");
     weekField = document.getElementById("week");
     sacrificesLeftField = document.getElementById("sacrificesLeftField");
+    speechTextArea = document.getElementById("speechTextArea");
+    priestSelect = document.getElementById("priestSelect");
 
     GameData.godsSacrificesDemand = getRndInteger(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK);
     GameData.money = Rules.STARTING_MONEY;
+
+    speechTextArea.onpaste = function(event){event.preventDefault()};
+    
     generateRandomPerson();
     refreshSacrifices();
     updateSatisfactionSlider();
     updateOperationStatus();
+    refreshPriests();
 }
 
 function updateOperationStatus(){
@@ -34,17 +42,26 @@ function updateOperationStatus(){
     sacrificesLeftField.textContent = GameData.godsSacrificesDemand
 }
 
+function refreshPriests(){
+    removeOptions(priestSelect);
+    GameData.priests.forEach(element => {
+        var option = document.createElement("option");
+        option.text = element.id + idOfPersonSeparator + " " +  element.name + " " + element.surname + " " + (element.isHungry() ?  hungryText : "");
+        priestSelect.add(option)
+    });
+}
+
 function refreshSacrifices(){
     removeOptions(selectSacrifice);
     GameData.victims.forEach(element => {
         var option = document.createElement("option");
-        option.text = element.id + victimSeparationChar + " " +  element.name + " " + element.surname + " " + (element.isHungry() ?  hungryText : "");
+        option.text = element.id + idOfPersonSeparator + " " +  element.name + " " + element.surname + " " + (element.isHungry() ?  hungryText : "");
         selectSacrifice.add(option)
     });
 }
 
 function sacrifice(){
-    var selectedID = parseInt(selectSacrifice.value.split(victimSeparationChar)[0]);
+    var selectedID = parseInt(selectSacrifice.value.split(idOfPersonSeparator)[0]);
     var victim = getVictim(selectedID);
     if(victim === undefined){
         return;
@@ -116,6 +133,19 @@ function feedVictims(){
             removeVictim(victim.id);
         }
     });
+}
+
+function readSpeech(){
+    var words =  speechTextArea.value.match(/\S+/g);
+    var moneyMade = 0;
+    var selectedID = parseInt(priestSelect.value.split(idOfPersonSeparator)[0]);
+    var priest = getPriest(selectedID);
+    var skillFactor = priest.skills.speakerSkill / Rules.MAXIMAL_SKILL_VALUE;
+    words.forEach(element => {
+        moneyMade += Rules.EVIL_WORDS.includes(element) ? Math.floor(Rules.MAX_MONEY_FOR_EVERY_EVIL_WORD_IN_SPEECH * skillFactor) : 0;
+    });
+    GameData.money += moneyMade;
+    nextDay();
 }
 
 function punishPlayer(){

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Evil Cult Accountancy ver. 0.2</title>
+    <title>Evil Cult Accountancy ver. 0.3</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="js/randoms.js"></script>
     <script src="js/rules.js"></script>
@@ -11,7 +11,7 @@
     <script src="js/main.js"></script>
   </head>
   <body onload="init()">
-    <h1>Evil Cult Accountancy v0.2</h1>
+    <h1>Evil Cult Accountancy v0.3</h1>
 
     <div id="sacrificesTab" class="tab">
         <h2>Sacrifices</h2>
@@ -24,14 +24,22 @@
 
     <div id="gatheringsTab" class="tab">
         <h2>Cult gatherings</h2>
+        Write a spech for the next cult gathering. Better the speach (and priest reading it) more money you gonna get for it!
+        Use some nice words, like "satan" or "evil".
+        <br>
+        <textarea id="speechTextArea"></textarea>
+        <br>
+        Select priest:
+        <select id="priestSelect">
+        </select> 
+        <button onclick="readSpeech()">Call for gathering</button>
     </div>
 
     <div id="evilOperationsTab" class="tab">
         <h2>Cult operations</h2>
     </div>
-
-    <div id="statusTab">
-        <h3>Operation status</h3>
+    <div id="statusTab" class="operationStatus">
+        <h2>Operation status</h2>
         Evil gods satisfaction: <progress value="22" max="100" id="godsSatisfaction"> </progress><br>
         Sacrifices quota for this week <span id="sacrificesLeftField"></span><br>
         Money: <span id = "moneyField"></span>$<br>

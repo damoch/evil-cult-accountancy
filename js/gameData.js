@@ -1,14 +1,14 @@
 GameData = {
-    victims : generateListOfRandomPeople(5),
+    victims : generateListOfRandomPeople(Rules.STARTING_PRISONERS_COUNT),
+    henchmen : generateListOfRandomPeople(Rules.STARTING_HENCHMEN_COUNT),
+    priests : generateListOfRandomPeople(Rules.STARTING_PRIESTS_COUNT),
 
     godsSatisfaction : Rules.STARTING_GODS_SATISFACTION,
 
     godsSacrificesDemand : Rules.MINIMUM_SACRIFICES_FOR_WEEK,
     money : Rules.STARTING_MONEY,
-    day : 1,
-    week : 1,
-
-
+    day : Rules.STARTING_DAY,
+    week : Rules.STARTING_WEEK,
 }
 
 function removeVictim(id){
@@ -19,3 +19,6 @@ function getVictim(id){
     return GameData.victims.filter(function(p){return p.id === id})[0];
 }
 
+function getPriest(id){
+    return GameData.priests.filter(function(p){return p.id === id})[0];
+}
