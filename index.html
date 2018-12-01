@@ -4,9 +4,37 @@
     <meta charset="utf-8">
     <title>Evil Cult Accountancy ver. 0.1</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/person.js"></script>
+    <script src="js/gameData.js"></script>
     <script src="js/main.js"></script>
   </head>
-  <body>
+  <body onload="init()">
     <h1>Evil Cult Accountancy v0.1</h1>
+
+    <div id="sacrificesTab" class="tab">
+        <h2>Sacrifices</h2>
+
+        Select victim:
+        <select id="victimSelect">
+                <!-- <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option> -->
+        </select> 
+        <button onclick="sacrifice()">Sacrifice!</button>
+    </div>
+
+    <div id="gatheringsTab" class="tab">
+        <h2>Cult gatherings</h2>
+    </div>
+
+    <div id="evilOperationsTab" class="tab">
+        <h2>Cult operations</h2>
+    </div>
+
+    <div id="statusTab">
+        <h3>Operation status</h3>
+        Evil gods satisfaction: <progress value="22" max="100" id="godsSatisfaction"> </progress>
+    </div>
   </body>
 </html>
