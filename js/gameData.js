@@ -21,3 +21,10 @@ function removeVictim(id){
 function getVictim(id){
     return GameData.victims.filter(function(p){return p.id === id})[0];
 }
+
+const RandomData = {
+    names : ["Aarika", "Dan", "Anniyah", "Tia", "Star", "Lottie", "Carlos", "Elisha", "Scott", "Rubie", "Aston", "Esme-Rose", "Veronika", "Isaiah", "Marlie", "Marwan", "Honey",
+            "Yara", "Misbah", "Elizabeth", "Dorian", "Aniya", "Dolly", "Carl", "Tony", "Kaydan", "Dilara", "Kenneth", "Aleyna", "Chelsie"],
+    surnames : ["Weber", "Lara", "Graves", "Sherman", "Wilde", "Mcfarland", "Greer", "Weir", "Bernard", "Hunt", "Clements", "Gilbert", "Blankenship", "Lugo", "Yoder", "Hughes",
+                "Wardle", "Jacobs", "Harrison", "Gates", "Guerrero", "Day", "Hough", "Woolley", "Thatcher", "Mcarthur", "Calderon", "Mccormack", "Fisher", "Eaton"],
+}
