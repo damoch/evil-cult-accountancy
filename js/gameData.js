@@ -6,6 +6,8 @@ GameData = {
 
     godsSatisfaction : 50,
 
+    godsSacrificesDemand : 4,
+
 }
 
 function removeVictim(id){

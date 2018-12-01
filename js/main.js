@@ -11,6 +11,7 @@ var hungryText = "(hungry)";
 var day = 1;
 var week = 1;
 var daysToWeek = 7;
+var sacrificesForWeekLeft = 0;
 
 function init(){
     selectSacrifice = document.getElementById("victimSelect");
@@ -19,6 +20,7 @@ function init(){
     dayField = document.getElementById("day");
     weekField = document.getElementById("week");
 
+    sacrificesForWeekLeft = Math.floor(Math.random(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK));
     money = 100;
 
     refreshSacrifices();
