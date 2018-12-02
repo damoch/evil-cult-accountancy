@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Evil Cult Managment System ver. 0.8</title>
+    <title>Evil Cult Managment System ver. 0.9</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="js/randoms.js"></script>
     <script src="js/rules.js"></script>
@@ -13,20 +13,21 @@
     <script src="js/main.js"></script>
   </head>
   <body onload="init()">
-    <h1 id="title">Evil Cult Managment System v0.8</h1>
+    <h1 id="title">Evil Cult Managment System v0.9</h1>
 
     <div id="sacrificesTab" class="tab">
         <h2>Sacrifices</h2>
-
+        Sacrificing makes Evil Gods happy, and less likely to unleash their infinite anger upon the World.<br>
+        Keep in mind, that you have to satisfy weekly sacrifices quota!<br>
         Select victim:
         <select id="victimSelect">
         </select> 
-        <button onclick="sacrifice()">Sacrifice!</button>
+        <button onclick="sacrifice()">Sacrifice!</button> (Starts new day)
     </div>
 
     <div id="gatheringsTab" class="tab">
         <h2>Cult gatherings</h2>
-        Write a spech for the next cult gathering. Better the speach (and priest reading it) more money you gonna get for it!
+        Write a spech for the next cult gathering. Better the speech (and priest reading it) more money you gonna get for it!
         Use some nice words, like "satan" or "evil".
         <br>
         <textarea id="speechTextArea" cols="73" rows="15"></textarea>
@@ -34,12 +35,13 @@
         Select priest:
         <select id="priestSelect">
         </select> 
-        <button onclick="readSpeech()">Call for gathering</button><br>
+        <button onclick="readSpeech()">Call for gathering</button>(Starts new day)<br>
         Last speech made: <span id="lastSpeechStatus"></span>$
     </div>
 
     <div id="evilOperationsTab" class="tab">
         <h2>Cult operations</h2>
+        You can send you henchmen to "convince" new followers to joining your cult <br>
         Select henchmen: <select id="henchmanSelect"></select><br>
         <button onclick="findNewFollower()">Find new follower</button>
         <div id="newFollowerDesc">
@@ -49,6 +51,7 @@
             Henchmen skill: <span id="newHenchmen"></span><br>
             Speaking skill: <span id="newSpeaking"></span><br>
             <button onclick="hireAsHenchmen()">Hire as henchmen</button> <button onclick="hireAsPriest()">Hire as priest</button> <button onclick="enslaveAsVictim()">Enslave as victim</button>
+            (Starts new day)
         </div>
     </div>
     <div id="statusTab" class="operationStatus">
@@ -64,6 +67,12 @@
             <h3>Operation log</h3>
             <textarea rows="15" cols="50" readonly="true" id="logTextArea">
             </textarea>
+        </div>
+        <div class="tab">
+            <h2>Credits</h2>
+            Gameplay: <a target="_blank" rel="noopener noreferrer" href="https://damoch.github.io">kszaku</a><br>
+            ASCII arts: <a href="http://www.asciiworld.com/-Death-Co-.html">ASCII Word</a><br>
+            SFX: <a target="_blank" rel="noopener noreferrer" href="https://opengameart.org/users/qubodup">qubodup</a> <a target="_blank" rel="noopener noreferrer" href="https://opengameart.org/users/cadere-sounds">Cadere Sounds</a> <a href="https://opengameart.org/users/vinrax">Vinrax</a>
         </div>
     </div>
   </body>

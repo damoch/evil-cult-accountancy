@@ -1,4 +1,4 @@
-const badasssSkull = `<pre>You have failed the Evil Gods. 
+const badasssSkull = `<center><pre>You have failed the Evil Gods. 
                                ...----.... 
                          ..-:"''         ''"-.. 
                       .-'                      '-. 
@@ -49,4 +49,6 @@ const badasssSkull = `<pre>You have failed the Evil Gods.
                    "::.::.. .. .  ...:::IIHHMMMMHMV" 
                      "V::... . .I::IHHMMV"' 
                        '"VHVHHHAHHHHMMV:"'
-</pre>`;
+</pre></center>`;
+
+const gameOverSound = "snd/HorrorCinema82014.wav"

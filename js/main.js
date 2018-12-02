@@ -70,6 +70,18 @@ function init(){
     logLength = logTextArea.rows;
     logTextArea.value = "";
 
+    window.onbeforeunload = function (e) {
+        var e = e || window.event;
+        readSpookyText();
+        //IE & Firefox
+        if (e) {
+          e.returnValue = 'There is no escape';
+        }
+        
+        // For Safari
+        return 'There is no escape';
+      };
+
     generateRandomPerson();
     refreshSacrifices();
     updateSatisfactionSlider();
@@ -242,6 +254,8 @@ function findNewFollower(){
 }
 
 function punishPlayer(){
+    var audio = new Audio(gameOverSound);
+    audio.play();
     document.body.innerHTML = badasssSkull;
     changeColors();
 }
@@ -252,8 +266,12 @@ function changeColors(){
 }
 
 function flipBackgroundColors(){
-    var rnd = getRndInteger(0, 100) < 50;
-    document.body.style.backgroundColor = rnd ?  "black" : "red";
+    if(document.body.style.backgroundColor !== "red"){
+        document.body.style.backgroundColor = "red";
+    }
+    else{
+        document.body.style.backgroundColor = "black";
+    }
 }
 
 function printLog(text){
