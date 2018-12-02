@@ -11,17 +11,25 @@ var selectSacrifice;
 var priestSelect;
 var henchmanSelect;
 
-var idOfPersonSeparator = ':';
-var hungryText = "(hungry)";
-var ageText = " Age: ";
-var speechSkillText = ", speech skill: ";
-var henchmanSkillText = ", henchmen skill: ";
-var worthForGodsText = ", potential worth for gods: ";
-var logPrefix = "Day: ";
-var diedLogPostfix = " died of hunger";
-var dailyVictimStatus = "Total cost of feeding prisoners: ";
+const idOfPersonSeparator = ':';
+const hungryText = "(hungry)";
+const ageText = " Age: ";
+const speechSkillText = ", speech skill: ";
+const henchmanSkillText = ", henchmen skill: ";
+const worthForGodsText = ", potential worth for gods: ";
+const logPrefix = "Day: ";
+const diedLogPostfix = " died of hunger";
+const dailyVictimStatus = "Total cost of feeding prisoners: ";
+const speechLogPrefix = "Speech by ";
+const speechLogMiddle = " made us ";
+const sacrificeLogText = " has been sacrificed for glory of the Evil Gods";
+const henchmanFailureLog = " has failed, and fell into the hands of the police";
+const dayEndLog = "Day ended";
+const weekEndLog = "Week ended";
+const quotaNotSatisfiedLog = "Weekly sacrifices quota not met. Evil Gods are furious!";
+const quotaMetLog = "Weekly sacrifices quota met. Evil Gods are pleased";
+const daysToWeek = 7;
 
-var daysToWeek = 7;
 var logLength = 0;
 var logData = [];
 
@@ -100,6 +108,7 @@ function sacrifice(){
     }
     GameData.godsSatisfaction += victim.isHungry() ? victim.worthForGods : victim.worthForGods / Rules.VICTIM_HUNGRY_PENALTY;
     GameData.godsSacrificesDemand--;
+    printLog(victim.name + " " + victim.surname + sacrificeLogText);
     removeVictim(selectedID);
     refreshSacrifices();
     updateSatisfactionSlider();
@@ -120,6 +129,7 @@ function removeOptions(selectbox)
 }
 
 function nextDay(){
+    printLog(dayEndLog);
     GameData.day++;
     if(GameData.day % daysToWeek === 0){
         GameData.week++;
@@ -142,11 +152,14 @@ function nextDay(){
 }
 
 function weeklyEvent(){
+    printLog(weekEndLog);
     if(GameData.godsSacrificesDemand > 0){
         GameData.godsSatisfaction -= GameData.godsSacrificesDemand * Rules.SACRIFICES_QUOTA_NOT_MET_PENALTY;
+        printLog(quotaNotSatisfiedLog);
     }
     else{
         GameData.godsSatisfaction += Rules.SACRIFICES_QUOTA_MET_PRIZE;
+        printLog(quotaMetLog);
     }
     GameData.godsSacrificesDemand = getRndInteger(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK);
 }
@@ -181,6 +194,7 @@ function readSpeech(){
     });
     GameData.money += moneyMade;
     lastSpeechText.textContent = moneyMade;
+    printLog(speechLogPrefix + priest.name + " " + priest.surname + " " + speechLogMiddle + moneyMade + "$");
     speechTextArea.value = "";
     nextDay();
 }
@@ -193,7 +207,9 @@ function findNewFollower(){
         console.log("success");
     }
     else{
-        console.log("failure");
+        printLog(henchmen.name + " " + henchmen.surname + henchmanFailureLog);
+        removeHenchmen(henchmen.id);
+        nextDay();
     }
 }
 
