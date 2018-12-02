@@ -4,12 +4,16 @@ var dayField;
 var weekField;
 var sacrificesLeftField;
 var speechTextArea;
+var lastSpeechText;
 
 var selectSacrifice;
 var priestSelect;
 
 var idOfPersonSeparator = ':';
 var hungryText = "(hungry)";
+var ageText = " Age: ";
+var speechSkillText = ", speech skill: ";
+var worthForGodsText = ", potential worth for gods: ";
 
 var daysToWeek = 7;
 
@@ -22,12 +26,14 @@ function init(){
     sacrificesLeftField = document.getElementById("sacrificesLeftField");
     speechTextArea = document.getElementById("speechTextArea");
     priestSelect = document.getElementById("priestSelect");
+    lastSpeechText = document.getElementById("lastSpeechStatus");
 
     GameData.godsSacrificesDemand = getRndInteger(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK);
     GameData.money = Rules.STARTING_MONEY;
 
     speechTextArea.onpaste = function(event){event.preventDefault()};
-    
+    speechTextArea.value = "";
+
     generateRandomPerson();
     refreshSacrifices();
     updateSatisfactionSlider();
@@ -46,7 +52,7 @@ function refreshPriests(){
     removeOptions(priestSelect);
     GameData.priests.forEach(element => {
         var option = document.createElement("option");
-        option.text = element.id + idOfPersonSeparator + " " +  element.name + " " + element.surname + " " + (element.isHungry() ?  hungryText : "");
+        option.text = element.id + idOfPersonSeparator + " " +  element.name + " " + element.surname + ", " + ageText + element.age + speechSkillText + element.skills.speakerSkill;
         priestSelect.add(option)
     });
 }
@@ -55,7 +61,10 @@ function refreshSacrifices(){
     removeOptions(selectSacrifice);
     GameData.victims.forEach(element => {
         var option = document.createElement("option");
-        option.text = element.id + idOfPersonSeparator + " " +  element.name + " " + element.surname + " " + (element.isHungry() ?  hungryText : "");
+        option.text = element.id + idOfPersonSeparator + " " 
+        +  element.name + " " + element.surname  + "," + 
+        ageText + element.age +  " " + (element.isHungry() ?  hungryText : "")
+        + worthForGodsText + element.worthForGods;
         selectSacrifice.add(option)
     });
 }
@@ -145,6 +154,8 @@ function readSpeech(){
         moneyMade += Rules.EVIL_WORDS.includes(element) ? Math.floor(Rules.MAX_MONEY_FOR_EVERY_EVIL_WORD_IN_SPEECH * skillFactor) : 0;
     });
     GameData.money += moneyMade;
+    lastSpeechText.textContent = moneyMade;
+    speechTextArea.value = "";
     nextDay();
 }
 

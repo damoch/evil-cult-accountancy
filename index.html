@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Evil Cult Accountancy ver. 0.3</title>
+    <title>Evil Cult Managment System ver. 0.5</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="js/randoms.js"></script>
     <script src="js/rules.js"></script>
@@ -11,7 +11,7 @@
     <script src="js/main.js"></script>
   </head>
   <body onload="init()">
-    <h1>Evil Cult Accountancy v0.3</h1>
+    <h1 id="title">Evil Cult Managment System v0.5</h1>
 
     <div id="sacrificesTab" class="tab">
         <h2>Sacrifices</h2>
@@ -32,7 +32,8 @@
         Select priest:
         <select id="priestSelect">
         </select> 
-        <button onclick="readSpeech()">Call for gathering</button>
+        <button onclick="readSpeech()">Call for gathering</button><br>
+        Last speech made: <span id="lastSpeechStatus"></span>$
     </div>
 
     <div id="evilOperationsTab" class="tab">
