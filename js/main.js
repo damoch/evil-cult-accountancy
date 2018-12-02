@@ -231,7 +231,18 @@ function findNewFollower(){
 }
 
 function punishPlayer(){
-    //alert("Gods anger will fall upon you!");
+    document.body.innerHTML = badasssSkull;
+    changeColors();
+}
+
+function changeColors(){
+    document.body.style.color = "white";
+    setInterval(flipBackgroundColors, 500);
+}
+
+function flipBackgroundColors(){
+    var rnd = getRndInteger(0, 100) < 50;
+    document.body.style.backgroundColor = rnd ?  "black" : "red";
 }
 
 function printLog(text){
