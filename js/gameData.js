@@ -22,3 +22,7 @@ function getVictim(id){
 function getPriest(id){
     return GameData.priests.filter(function(p){return p.id === id})[0];
 }
+
+function getHenchmen(id){
+    return GameData.henchmen.filter(function(p){return p.id === id})[0];
+}

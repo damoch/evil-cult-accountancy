@@ -5,17 +5,25 @@ var weekField;
 var sacrificesLeftField;
 var speechTextArea;
 var lastSpeechText;
+var logTextArea;
 
 var selectSacrifice;
 var priestSelect;
+var henchmanSelect;
 
 var idOfPersonSeparator = ':';
 var hungryText = "(hungry)";
 var ageText = " Age: ";
 var speechSkillText = ", speech skill: ";
+var henchmanSkillText = ", henchmen skill: ";
 var worthForGodsText = ", potential worth for gods: ";
+var logPrefix = "Day: ";
+var diedLogPostfix = " died of hunger";
+var dailyVictimStatus = "Total cost of feeding prisoners: ";
 
 var daysToWeek = 7;
+var logLength = 0;
+var logData = [];
 
 function init(){
     selectSacrifice = document.getElementById("victimSelect");
@@ -27,6 +35,8 @@ function init(){
     speechTextArea = document.getElementById("speechTextArea");
     priestSelect = document.getElementById("priestSelect");
     lastSpeechText = document.getElementById("lastSpeechStatus");
+    henchmanSelect = document.getElementById("henchmanSelect");
+    logTextArea = document.getElementById("logTextArea");
 
     GameData.godsSacrificesDemand = getRndInteger(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK);
     GameData.money = Rules.STARTING_MONEY;
@@ -34,11 +44,15 @@ function init(){
     speechTextArea.onpaste = function(event){event.preventDefault()};
     speechTextArea.value = "";
 
+    logLength = logTextArea.rows;
+    logTextArea.value = "";
+
     generateRandomPerson();
     refreshSacrifices();
     updateSatisfactionSlider();
     updateOperationStatus();
     refreshPriests();
+    refreshHenchman();
 }
 
 function updateOperationStatus(){
@@ -66,6 +80,15 @@ function refreshSacrifices(){
         ageText + element.age +  " " + (element.isHungry() ?  hungryText : "")
         + worthForGodsText + element.worthForGods;
         selectSacrifice.add(option)
+    });
+}
+
+function refreshHenchman(){
+    removeOptions(henchmanSelect);
+    GameData.henchmen.forEach(element => {
+        var option = document.createElement("option");
+        option.text = element.id + idOfPersonSeparator + " " +  element.name + " " + element.surname + ", " + ageText + element.age + henchmanSkillText + element.skills.henchmanSkill;
+        henchmanSelect.add(option)
     });
 }
 
@@ -112,7 +135,6 @@ function nextDay(){
     if(GameData.godsSatisfaction < Rules.MINIMUM_GODS_SATISFACTION){
         punishPlayer();
     }
-
     feedVictims();
     updateOperationStatus();
     refreshSacrifices();
@@ -130,18 +152,22 @@ function weeklyEvent(){
 }
 
 function feedVictims(){
+    var totalFeedingCost = 0;
     GameData.victims.forEach(victim => {
         if(victim.dailyCost <= GameData.money){
             victim.daysHungry = 0;
             GameData.money -= victim.dailyCost;
+            totalFeedingCost += victim.dailyCost;
         }
         else{
             victim.daysHungry++;
         }
         if(victim.daysHungry > Rules.MAX_DAYS_HUNGRY){
             removeVictim(victim.id);
+            printLog(victim.name + " " + victim.surname + diedLogPostfix);
         }
     });
+    printLog(dailyVictimStatus + totalFeedingCost + "$");
 }
 
 function readSpeech(){
@@ -159,6 +185,30 @@ function readSpeech(){
     nextDay();
 }
 
+function findNewFollower(){
+    var selectedID = parseInt(henchmanSelect.value.split(idOfPersonSeparator)[0]);
+    var henchmen = getHenchmen(selectedID);
+    var randomNumber = getRndInteger(Rules.HENCHMEN_SUCCESS_MIN_VALUE, Rules.HENCHMEN_SUCCESS_MAX_VALUE);
+    if(henchmen.skills.henchmanSkill > randomNumber){
+        console.log("success");
+    }
+    else{
+        console.log("failure");
+    }
+}
+
 function punishPlayer(){
     //alert("Gods anger will fall upon you!");
+}
+
+function printLog(text){
+    var dataToLog = logPrefix + GameData.day +" - " + text; 
+    logTextArea.value = "";
+    logData.unshift(dataToLog);
+    if(logData.length > logLength){
+        logData.pop();
+    }
+    logData.forEach(element => {
+        logTextArea.value += element + "\n";
+    });
 }

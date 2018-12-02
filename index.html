@@ -38,6 +38,8 @@
 
     <div id="evilOperationsTab" class="tab">
         <h2>Cult operations</h2>
+        Select henchmen: <select id="henchmanSelect"></select><br>
+        <button onclick="findNewFollower()">Find new follower</button>
     </div>
     <div id="statusTab" class="operationStatus">
         <h2>Operation status</h2>
@@ -46,6 +48,8 @@
         Money: <span id = "moneyField"></span>$<br>
         Day: <span id = "day"></span>, week: <span id = "week"></span><br>
         <button onclick="nextDay()">Next day</button>
+        <textarea rows="15" cols="50" readonly="true" id="logTextArea">
+        </textarea>
     </div>
   </body>
 </html>
