@@ -33,5 +33,7 @@ const Rules = {
     GODS_SATISFACTION_DAILY_DROP : 10,
 
     MAX_MONEY_FOR_EVERY_EVIL_WORD_IN_SPEECH : 10,
-    EVIL_WORDS : ["evil", "satan", "domination", "curse", "kill", "demon", "cult", "bad", "villain", "empire", "hell", "follower", "mindless", "stupid"],
+    EVIL_WORDS : ["evil", "satan", "domination", "curse", "kill", "demon", "cult", "bad", "villain", "empire", "hell", "follower", "mindless", "stupid", "devilish", "demonic",
+                    "satanic", "killing", "slaughter", "hellish", ],
+    SPOOKY_EVENTS_OCCURENCE_TRESHOLD : 40,
 }

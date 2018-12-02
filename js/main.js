@@ -35,6 +35,7 @@ const dayEndLog = "Day ended";
 const weekEndLog = "Week ended";
 const quotaNotSatisfiedLog = "Weekly sacrifices quota not met. Evil Gods are furious!";
 const quotaMetLog = "Weekly sacrifices quota met. Evil Gods are pleased";
+const priestWentCrazyLog = " went crazy, because of pure evilness and incomprehensibleness of your speech!"
 const daysToWeek = 7;
 
 var logLength = 0;
@@ -163,6 +164,10 @@ function nextDay(){
     updateOperationStatus();
     refreshSacrifices();
     updateSatisfactionSlider();
+
+    if(GameData.godsSatisfaction <= Rules.SPOOKY_EVENTS_OCCURENCE_TRESHOLD){
+        startRandomSpookyEvent();
+    }
 }
 
 function weeklyEvent(){
@@ -210,6 +215,12 @@ function readSpeech(){
     lastSpeechText.textContent = moneyMade;
     printLog(speechLogPrefix + priest.name + " " + priest.surname + " " + speechLogMiddle + moneyMade + "$");
     speechTextArea.value = "";
+    var rnd = getRndInteger(0, Rules.MAXIMAL_SKILL_VALUE);
+    if(rnd > priest.skills.speakerSkill){
+        printLog(priest.name + " " + priest.surname + priestWentCrazyLog);
+        removePriest(priest.id);
+        refreshPriests();
+    }
     nextDay();
 }
 

@@ -19,6 +19,10 @@ function removeHenchmen(id){
     GameData.henchmen = GameData.henchmen.filter(function(p){return p.id !== id});
 }
 
+function removePriest(id){
+    GameData.priests = GameData.priests.filter(function(p){return p.id !== id});
+}
+
 function getVictim(id){
     return GameData.victims.filter(function(p){return p.id === id})[0];
 }
