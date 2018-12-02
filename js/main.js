@@ -6,6 +6,13 @@ var sacrificesLeftField;
 var speechTextArea;
 var lastSpeechText;
 var logTextArea;
+var newFollowerDesc;
+
+var newName;
+var newSurname;
+var newAge;
+var newHenchmen;
+var newSpeaking;
 
 var selectSacrifice;
 var priestSelect;
@@ -32,6 +39,7 @@ const daysToWeek = 7;
 
 var logLength = 0;
 var logData = [];
+var newPerson;
 
 function init(){
     selectSacrifice = document.getElementById("victimSelect");
@@ -45,6 +53,12 @@ function init(){
     lastSpeechText = document.getElementById("lastSpeechStatus");
     henchmanSelect = document.getElementById("henchmanSelect");
     logTextArea = document.getElementById("logTextArea");
+    newFollowerDesc = document.getElementById("newFollowerDesc");
+    newName = document.getElementById("newName");
+    newSurname = document.getElementById("newSurname");
+    newAge = document.getElementById("newAge");
+    newHenchmen = document.getElementById("newHenchmen");
+    newSpeaking = document.getElementById("newSpeaking");
 
     GameData.godsSacrificesDemand = getRndInteger(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK);
     GameData.money = Rules.STARTING_MONEY;
@@ -204,11 +218,14 @@ function findNewFollower(){
     var henchmen = getHenchmen(selectedID);
     var randomNumber = getRndInteger(Rules.HENCHMEN_SUCCESS_MIN_VALUE, Rules.HENCHMEN_SUCCESS_MAX_VALUE);
     if(henchmen.skills.henchmanSkill > randomNumber){
-        console.log("success");
+        newFollowerDesc.style.visibility = "visible";
+        getNewFollower();
     }
     else{
+        newFollowerDesc.style.visibility = "hidden";
         printLog(henchmen.name + " " + henchmen.surname + henchmanFailureLog);
         removeHenchmen(henchmen.id);
+        refreshHenchman();
         nextDay();
     }
 }
@@ -227,4 +244,37 @@ function printLog(text){
     logData.forEach(element => {
         logTextArea.value += element + "\n";
     });
+}
+
+function getNewFollower(){
+    newPerson = generateRandomPerson();
+    newName.textContent = newPerson.name;
+    newSurname.textContent = newPerson.surname;
+    newAge.textContent = newPerson.age;
+    newHenchmen.textContent = newPerson.skills.henchmanSkill;
+    newSpeaking.textContent = newPerson.skills.speakerSkill;
+}
+
+function hireAsHenchmen(){
+    GameData.henchmen.push(newPerson);
+    newPerson = null;
+    newFollowerDesc.style.visibility = "hidden";
+    refreshHenchman();
+    nextDay();
+}
+
+function hireAsPriest(){
+    GameData.priests.push(newPerson);
+    newPerson = null;
+    newFollowerDesc.style.visibility = "hidden";
+    refreshPriests();
+    nextDay();
+}
+
+function enslaveAsVictim(){
+    GameData.victims.push(newPerson);
+    newPerson = null;
+    newFollowerDesc.style.visibility = "hidden";
+    refreshSacrifices();
+    nextDay();
 }
