@@ -1,4 +1,4 @@
-const spookyEvents = [distortTitle, printSpookyTextToLog, openSpookyWindow, readSpookyText, openSpookyAlert, makeSpookyTitle, spookyBackground, playSpookySound];
+const spookyEvents = [distortTitle, printSpookyTextToLog, openSpookyWindow, readSpookyText, openSpookyAlert, makeSpookyTitle, spookyBackground, playSpookySound, makeManySpookyTitles, makeManySpookyWindows];
 
 function startRandomSpookyEvent(){
     spookyEvents[getRndInteger(0, spookyEvents.length)]();
@@ -17,8 +17,12 @@ function printSpookyTextToLog(){
 }
 
 function openSpookyWindow(){
+    var speed = getRndInteger(5, 20);
+    var rndX = getRndInteger(100, 500);
+    var rndY = getRndInteger(100, 500);
     var win = window.open("", randomSpooky(false), "width=400,height=300");
-    var id = setInterval(function(){win.moveBy(1, 1);}, 10)
+    win.moveTo(rndX, rndY);
+    var id = setInterval(function(){win.moveBy(1, 1);}, speed)
     
     setTimeout(function(){clearInterval(id); win.close()}, 5000);
 
@@ -43,16 +47,18 @@ function makeSpookyTitle(){
     var spookyT = randomSpooky(true);
     var currTIndx = 0;
     var startingStr = title.textContent;
+    title.style.color = "red";
     title.textContent = "";
     var id = setInterval(function(){
         title.textContent += spookyT[currTIndx++];
         if(currTIndx > spookyT.length - 1){
             setTimeout(function(){
                 title.textContent = startingStr;
+                title.style.color = "black";
             }, 3000);
             clearInterval(id);
         }
-    }, 300);
+    }, 100);
 }
 
 function spookyBackground(){
@@ -62,6 +68,20 @@ function spookyBackground(){
     var id = setInterval(flipBackgroundColors, 100);
     setTimeout(function(){clearTimeout(id); document.body.style.backgroundColor = defaultBackground; document.body.style.color = defaultFont;}, 2000);
 
+}
+
+function makeManySpookyTitles(){
+    var rnd = getRndInteger(2, 6);
+    for(var i = 0; i < rnd; i++){
+        makeSpookyTitle();
+    }
+}
+
+function makeManySpookyWindows(){
+    var rnd = getRndInteger(2, 6);
+    for(var i = 0; i < rnd; i++){
+        openSpookyWindow();
+    }
 }
 
 function playSpookySound(){

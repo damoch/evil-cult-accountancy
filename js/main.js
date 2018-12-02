@@ -134,6 +134,9 @@ function sacrifice(){
         return;
     }
     GameData.godsSatisfaction += victim.isHungry() ? victim.worthForGods : victim.worthForGods / Rules.VICTIM_HUNGRY_PENALTY;
+    if(GameData.godsSatisfaction > Rules.GODS_SATISFACTION_MAX){
+        GameData.godsSatisfaction = Rules.GODS_SATISFACTION_MAX;
+    }
     GameData.godsSacrificesDemand--;
     printLog(victim.name + " " + victim.surname + sacrificeLogText);
     removeVictim(selectedID);
@@ -177,7 +180,7 @@ function nextDay(){
     refreshSacrifices();
     updateSatisfactionSlider();
 
-    if(GameData.godsSatisfaction <= Rules.SPOOKY_EVENTS_OCCURENCE_TRESHOLD){
+    if(getRndInteger(0, GameData.godsSatisfaction) <= Rules.SPOOKY_EVENTS_OCCURENCE_TRESHOLD){
         startRandomSpookyEvent();
     }
 }
@@ -219,9 +222,12 @@ function readSpeech(){
     var moneyMade = 0;
     var selectedID = parseInt(priestSelect.value.split(idOfPersonSeparator)[0]);
     var priest = getPriest(selectedID);
+    if(priest === undefined){
+        return;
+    }
     var skillFactor = priest.skills.speakerSkill / Rules.MAXIMAL_SKILL_VALUE;
     words.forEach(element => {
-        moneyMade += Rules.EVIL_WORDS.includes(element) ? Math.floor(Rules.MAX_MONEY_FOR_EVERY_EVIL_WORD_IN_SPEECH * skillFactor) : 0;
+        moneyMade += Rules.EVIL_WORDS.includes(element.toLowerCase()) ? Math.floor(Rules.MAX_MONEY_FOR_EVERY_EVIL_WORD_IN_SPEECH * skillFactor) : 0;
     });
     GameData.money += moneyMade;
     lastSpeechText.textContent = moneyMade;
@@ -239,6 +245,9 @@ function readSpeech(){
 function findNewFollower(){
     var selectedID = parseInt(henchmanSelect.value.split(idOfPersonSeparator)[0]);
     var henchmen = getHenchmen(selectedID);
+    if(henchmen === undefined){
+        return;
+    }
     var randomNumber = getRndInteger(Rules.HENCHMEN_SUCCESS_MIN_VALUE, Rules.HENCHMEN_SUCCESS_MAX_VALUE);
     if(henchmen.skills.henchmanSkill > randomNumber){
         newFollowerDesc.style.visibility = "visible";
@@ -254,8 +263,6 @@ function findNewFollower(){
 }
 
 function punishPlayer(){
-    var audio = new Audio(gameOverSound);
-    audio.play();
     document.body.innerHTML = badasssSkull;
     changeColors();
 }
