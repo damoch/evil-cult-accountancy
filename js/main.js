@@ -159,6 +159,7 @@ function removeOptions(selectbox)
 }
 
 function nextDay(){
+    newFollowerDesc.style.visibility = "hidden";
     printLog(dayEndLog);
     GameData.day++;
     if(GameData.day % daysToWeek === 0){
@@ -176,11 +177,13 @@ function nextDay(){
         punishPlayer();
     }
     feedVictims();
+    tryAddRandomFollower();
     updateOperationStatus();
     refreshSacrifices();
     updateSatisfactionSlider();
 
-    if(getRndInteger(0, GameData.godsSatisfaction) <= Rules.SPOOKY_EVENTS_OCCURENCE_TRESHOLD){
+
+    if(GameData.godsSatisfaction <= Rules.SPOOKY_EVENTS_OCCURENCE_TRESHOLD){
         startRandomSpookyEvent();
     }
 }
@@ -254,7 +257,6 @@ function findNewFollower(){
         getNewFollower();
     }
     else{
-        newFollowerDesc.style.visibility = "hidden";
         printLog(henchmen.name + " " + henchmen.surname + henchmanFailureLog);
         removeHenchmen(henchmen.id);
         refreshHenchman();
@@ -321,7 +323,24 @@ function hireAsPriest(){
 function enslaveAsVictim(){
     GameData.victims.push(newPerson);
     newPerson = null;
-    newFollowerDesc.style.visibility = "hidden";
     refreshSacrifices();
     nextDay();
+}
+
+function tryAddRandomFollower(){
+    if(GameData.victims.length == 0 && GameData.henchmen.length == 0 && getRndInteger(0, 100) > Rules.SPAWN_RANDOM_NPC){
+        var st = "";
+        var newNpc = generateRandomPerson();
+        if(getRndInteger(0, 100) > Rules.SPAWN_RANDOM_NPC){
+            GameData.victims.push(newNpc);
+            refreshSacrifices();
+            st = "victim";
+        }
+        else{
+            GameData.henchmen.push(newNpc);
+            refreshHenchman();
+            st = "henchmen";
+        }
+        printLog("Evil Gods in their infinite winsdom had inspired " + newNpc.name + " " + newNpc.surname + " to volunteer as a" + st);
+    }
 }

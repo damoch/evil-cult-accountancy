@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Evil Cult Managment System ver. 1.0</title>
+    <title>Evil Cult Managment System ver. 1.1</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="js/randoms.js"></script>
     <script src="js/rules.js"></script>
@@ -13,7 +13,7 @@
     <script src="js/main.js"></script>
   </head>
   <body onload="init()">
-    <h1 id="title">Evil Cult Managment System v1.0</h1>
+    <h1 id="title">Evil Cult Managment System v1.1</h1>
 
     <div id="sacrificesTab" class="tab">
         <h2>Sacrifices</h2>
@@ -30,7 +30,7 @@
         Write a spech for the next cult gathering. Better the speech (and priest reading it) more money you gonna get for it!
         Use some nice words, like "satan" or "evil".
         <br>
-        <textarea id="speechTextArea" cols="73" rows="15"></textarea>
+        <textarea id="speechTextArea" cols="40" rows="15"></textarea>
         <br>
         Select priest:
         <select id="priestSelect">
@@ -41,7 +41,7 @@
 
     <div id="evilOperationsTab" class="tab">
         <h2>Cult operations</h2>
-        You can send you henchmen to "convince" new followers to joining your cult <br>
+        You can send you henchmen to "convince" new followers to join your cult <br>
         Select henchmen: <select id="henchmanSelect"></select><br>
         <button onclick="findNewFollower()">Find new follower</button>
         <div id="newFollowerDesc">
@@ -65,7 +65,7 @@
         </div>
         <div class="tab">
             <h3>Operation log</h3>
-            <textarea rows="15" cols="50" readonly="true" id="logTextArea">
+            <textarea rows="15" cols="40" readonly="true" id="logTextArea">
             </textarea>
         </div>
         <div class="tab">
@@ -73,7 +73,9 @@
             Gameplay: <a target="_blank" rel="noopener noreferrer" href="https://damoch.github.io">kszaku</a><br>
             ASCII arts: <a href="http://www.asciiworld.com/-Death-Co-.html">ASCII Word</a><br>
             SFX: <a target="_blank" rel="noopener noreferrer" href="https://opengameart.org/users/qubodup">qubodup</a> <a target="_blank" rel="noopener noreferrer" href="https://opengameart.org/users/cadere-sounds">Cadere Sounds</a> <a href="https://opengameart.org/users/vinrax">Vinrax</a><br>
-            Made for Ludum Dare 43
+            Made for Ludum Dare 43 <br>
+            <a href="https://damoch.github.io/ecms-jam-version">Jam version (not compatible with mobile devices)</a><br>
+            <a href="https://github.com/damoch/evil-cult-accountancy">GitHub repo</a><br><br><br>
         </div>
     </div>
   </body>
