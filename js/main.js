@@ -35,7 +35,7 @@ const dayEndLog = "Day ended";
 const weekEndLog = "Week ended";
 const quotaNotSatisfiedLog = "Weekly sacrifices quota not met. Evil Gods are furious!";
 const quotaMetLog = "Weekly sacrifices quota met. Evil Gods are pleased";
-const priestWentCrazyLog = " went crazy, because of pure evilness and incomprehensibleness of your speech!"
+const priestWentCrazyLog = " went insane, because of pure evilness and incomprehensibleness of your speech!"
 const daysToWeek = 7;
 
 var logLength = 0;
@@ -63,8 +63,7 @@ function init(){
 
     GameData.godsSacrificesDemand = getRndInteger(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK);
     GameData.money = Rules.STARTING_MONEY;
-
-    speechTextArea.onpaste = function(event){event.preventDefault()};
+    
     speechTextArea.value = "";
 
     logLength = logTextArea.rows;
@@ -341,6 +340,6 @@ function tryAddRandomFollower(){
             refreshHenchman();
             st = "henchmen";
         }
-        printLog("Evil Gods in their infinite winsdom had inspired " + newNpc.name + " " + newNpc.surname + " to volunteer as a" + st);
+        printLog("Evil Gods in their infinite winsdom had inspired " + newNpc.name + " " + newNpc.surname + " to volunteer as a " + st);
     }
 }
