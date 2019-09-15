@@ -7,6 +7,8 @@ var speechTextArea;
 var lastSpeechText;
 var logTextArea;
 var newFollowerDesc;
+var dailyCostText;
+var currentFundsText;
 
 var newName;
 var newSurname;
@@ -60,6 +62,8 @@ function init(){
     newAge = document.getElementById("newAge");
     newHenchmen = document.getElementById("newHenchmen");
     newSpeaking = document.getElementById("newSpeaking");
+    dailyCostText = document.getElementById("dailyCostText");
+    currentFundsText = document.getElementById("currentFundsText");
 
     GameData.godsSacrificesDemand = getRndInteger(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK);
     GameData.money = Rules.STARTING_MONEY;
@@ -93,7 +97,8 @@ function updateOperationStatus(){
     moneyField.textContent = GameData.money;
     dayField.textContent = GameData.day;
     weekField.textContent = GameData.week;
-    sacrificesLeftField.textContent = GameData.godsSacrificesDemand
+    sacrificesLeftField.textContent = GameData.godsSacrificesDemand;
+    currentFundsText.innerHTML = `Money: <b>$${GameData.money}</b>`
 }
 
 function refreshPriests(){
@@ -107,6 +112,7 @@ function refreshPriests(){
 
 function refreshSacrifices(){
     removeOptions(selectSacrifice);
+    var cost = 0;
     GameData.victims.forEach(element => {
         var option = document.createElement("option");
         option.text = element.id + idOfPersonSeparator + " " 
@@ -114,7 +120,12 @@ function refreshSacrifices(){
         ageText + element.age +  " " + (element.isHungry() ?  hungryText : "")
         + worthForGodsText + element.worthForGods;
         selectSacrifice.add(option)
+        cost += element.dailyCost;
     });
+    var textClass = cost < GameData.money ? 'dailyCostOK' : 'dailyCostWRONG';
+    const dailyPrisonersCostText = `Daily cost of feeding prisoners: <b class="${textClass}">$${cost}</b>`;
+    dailyCostText.innerHTML = dailyPrisonersCostText;
+
 }
 
 function refreshHenchman(){
@@ -136,7 +147,10 @@ function sacrifice(){
     if(GameData.godsSatisfaction > Rules.GODS_SATISFACTION_MAX){
         GameData.godsSatisfaction = Rules.GODS_SATISFACTION_MAX;
     }
-    GameData.godsSacrificesDemand--;
+    if(GameData.godsSacrificesDemand > 0)
+    {
+        GameData.godsSacrificesDemand--;
+    }
     printLog(victim.name + " " + victim.surname + sacrificeLogText);
     removeVictim(selectedID);
     refreshSacrifices();
