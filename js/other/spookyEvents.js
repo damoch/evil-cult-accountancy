@@ -54,7 +54,7 @@ function makeSpookyTitle(){
         if(currTIndx > spookyT.length - 1){
             setTimeout(function(){
                 title.textContent = startingStr;
-                title.style.color = "black";
+                title.style.color = "white";
             }, 3000);
             clearInterval(id);
         }
