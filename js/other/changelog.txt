@@ -1,6 +1,13 @@
 ver 1.2
+visual:
+    - background is now gradient
+    - cool shadow for headers
+    - added favicon
+    - added cool pentegram gif
+technical:
     - added field displaying daily cost of feeding prisoners
     - added field showing, how much money does player have
+fixes:
     - fixed scrolling issues on mobile devices 
     - fixed typo in title ;)
 ver 1.1
