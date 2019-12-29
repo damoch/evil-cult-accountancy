@@ -36,5 +36,6 @@ const Rules = {
     EVIL_WORDS : ["evil", "satan", "domination", "curse", "kill", "demon", "cult", "bad", "villain", "empire", "hell", "follower", "mindless", "stupid", "devilish", "demonic",
                     "satanic", "killing", "slaughter", "hellish", ],
     SPOOKY_EVENTS_OCCURENCE_TRESHOLD : 40,
-    SPAWN_RANDOM_NPC : 50
+    SPAWN_RANDOM_NPC : 50,
+    MAX_SPEECH_LENGTH : 600
 }

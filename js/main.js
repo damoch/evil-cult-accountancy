@@ -74,9 +74,11 @@ function init(){
     currentFundsText = document.getElementById("currentFundsText");
     topSacrificesQuotaText = document.getElementById("topSacrificesQuotaText");
 
+    speechTextArea.onkeydown = speechTextAreaKeyPressed;
+
     GameData.godsSacrificesDemand = getRndInteger(Rules.MINIMUM_SACRIFICES_FOR_WEEK, Rules.MAXIMUM_SACRIFICES_FOR_WEEK);
     GameData.money = Rules.STARTING_MONEY;
-    
+    speechTextArea.attributes["maxlength"] = Rules.MAX_SPEECH_LENGTH.toString();
     speechTextArea.value = "";
 
     logLength = logTextArea.rows;
@@ -103,6 +105,22 @@ function init(){
     updateOperationStatus();
     refreshPriests();
     refreshHenchman();
+}
+
+function speechTextAreaKeyPressed(event){
+    event.preventDefault();
+    if(speechTextArea.value.length > Rules.MAX_SPEECH_LENGTH){
+        return;
+    }
+    var selectedID = parseInt(priestSelect.value.split(idOfPersonSeparator)[0]);
+    var priest = getPriest(selectedID);
+
+    if(priest.skills.speakerSkill > getRndInteger(Rules.MINIMAL_SKILL_VALUE, Rules.MAXIMAL_SKILL_VALUE)){
+        speechTextArea.value += randomEvilWord().toUpperCase() + " ";
+    }
+    else{
+        speechTextArea.value += randomWord() + " ";
+    }
 }
 
 function updateOperationStatus(){
