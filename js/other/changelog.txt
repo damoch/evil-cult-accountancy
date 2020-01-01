@@ -1,6 +1,8 @@
 ver 1.3
 - typing mechanic reworked
 - operation status and log are put into a handy sidebar
+- added some fancy font
+- added even fancier css work
 
 ver 1.2
 visual:

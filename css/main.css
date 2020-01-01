@@ -1,3 +1,6 @@
+body{
+    font-family: 'IM Fell French Canon SC', serif;
+}
 h2{
     text-align: center;
     color: #FFFFFF;
@@ -58,4 +61,11 @@ a {
 .main{
     width: 66%; 
     /* margin-left:33%; */
+}
+#speechTextArea{
+    width:80%;
+    margin-left: 10%;
+}
+#logTextArea{
+    width:100%;
 }
