@@ -45,6 +45,7 @@ const daysToWeek = 7;
 var logLength = 0;
 var logData = [];
 var newPerson;
+var speechWordsInCurrentSentence = 0;
 
 window.mobilecheck = function() {
     var check = false;
@@ -114,13 +115,26 @@ function speechTextAreaKeyPressed(event){
     }
     var selectedID = parseInt(priestSelect.value.split(idOfPersonSeparator)[0]);
     var priest = getPriest(selectedID);
+    var upperCase = false;
 
+    if(speechWordsInCurrentSentence < Rules.MIN_SENTENCE_LENGTH && speechTextArea.value.length > 0){
+        speechWordsInCurrentSentence = getRndInteger(Rules.MIN_SENTENCE_LENGTH, Rules.MAX_SENTENCE_LENGTH);
+        speechTextArea.value = speechTextArea.value.substring(0,speechTextArea.value.length-1) + ". ";
+        upperCase = true;
+    }
+    word = "";
     if(priest.skills.speakerSkill > getRndInteger(Rules.MINIMAL_SKILL_VALUE, Rules.MAXIMAL_SKILL_VALUE)){
-        speechTextArea.value += randomEvilWord().toUpperCase() + " ";
+        word = randomEvilWord().toUpperCase() + " ";
     }
     else{
-        speechTextArea.value += randomWord() + " ";
+        word = randomWord() + " ";
     }
+
+    if(upperCase || speechTextArea.value.length == 0){
+        word = word.charAt(0).toUpperCase()+ word.substring(1)
+    }
+    speechWordsInCurrentSentence--;
+    speechTextArea.value+=word;
 }
 
 function updateOperationStatus(){
@@ -265,7 +279,7 @@ function feedVictims(){
 }
 
 function readSpeech(){
-    var words =  speechTextArea.value.match(/\S+/g);
+    var words =  speechTextArea.value.replace(/\./g,'').match(/\S+/g);
     var moneyMade = 0;
     var selectedID = parseInt(priestSelect.value.split(idOfPersonSeparator)[0]);
     var priest = getPriest(selectedID);

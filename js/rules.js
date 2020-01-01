@@ -37,5 +37,7 @@ const Rules = {
                     "satanic", "killing", "slaughter", "hellish", ],
     SPOOKY_EVENTS_OCCURENCE_TRESHOLD : 40,
     SPAWN_RANDOM_NPC : 50,
-    MAX_SPEECH_LENGTH : 600
+    MAX_SPEECH_LENGTH : 600,
+    MIN_SENTENCE_LENGTH : 1,
+    MAX_SENTENCE_LENGTH : 5
 }

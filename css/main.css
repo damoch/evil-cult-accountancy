@@ -15,9 +15,6 @@ select{
     text-align: center;
     margin-left: 47%;
 }
-#logTextArea{
-    margin-left: 38%;
-}
 #newFollowerDesc{
     visibility: hidden;
 }
