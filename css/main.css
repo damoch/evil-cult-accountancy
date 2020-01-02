@@ -57,6 +57,12 @@ a {
     margin-left: 66%;
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 20px;
+    color: black;
+}
+.sidestatus h2{
+    color: black;
+    text-shadow: none;
+
 }
 .main{
     width: 66%; 
@@ -67,5 +73,8 @@ a {
     margin-left: 10%;
 }
 #logTextArea{
+    width:100%;
+}
+.status-modal button{
     width:100%;
 }

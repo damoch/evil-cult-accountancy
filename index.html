@@ -84,19 +84,65 @@
     </div>
 </div>
 <div class="sidestatus">
-        <div>
-                <h2>Operation status</h2>
+    <div class="aesthetic-windows-95-modal">
+
+        <!-- Title Bar -->
+        <div class="aesthetic-windows-95-modal-title-bar">
+      
+          <div class="aesthetic-windows-95-modal-title-bar-text">
+            Operation status
+          </div>
+      
+          <div class="aesthetic-windows-95-modal-title-bar-controls">
+            <div class="aesthetic-windows-95-button-title-bar">
+              <button>
+                X
+              </button>
+            </div>
+          </div>
+      
+        </div>
+      
+      
+        <!-- Content -->
+        <!-- Could be a tabbed container, or a set of dropdowns, etc... -->
+        <div class="aesthetic-windows-95-modal-content">
+            <div class="status-modal">
                 Evil Gods satisfaction: <progress value="22" max="100" id="godsSatisfaction"> </progress><br>
                 Sacrifices quota for this week: <span id="sacrificesLeftField"></span><br>
-                Money: <span id = "moneyField"></span>$<br>
-                Day: <span id = "day"></span>, week: <span id = "week"></span><br>
-                <button class="aesthetic-windows-95-button" onclick="nextDay()">Next day</button class="aesthetic-windows-95-button">
+                Money: <span id="moneyField"></span>$<br>
+                Day: <span id="day"></span>, week: <span id="week"></span><br>
+                <button class="aesthetic-windows-95-button" onclick="nextDay()">Next day</button
+                    class="aesthetic-windows-95-button">
+            </div>
+        
         </div>
-        <div>
-            <h2>Operation log</h2>
+    </div>
+    <br>
+    <br>
+    <div class="aesthetic-windows-95-modal">
+    
+        <!-- Title Bar -->
+        <div class="aesthetic-windows-95-modal-title-bar">
+    
+            <div class="aesthetic-windows-95-modal-title-bar-text">
+                Log
+            </div>
+    
+            <div class="aesthetic-windows-95-modal-title-bar-controls">
+                <div class="aesthetic-windows-95-button-title-bar">
+                    <button>
+                        X
+                    </button>
+                </div>
+            </div>
+    
+        </div>
+    
+        <div class="aesthetic-windows-95-modal-content">
             <textarea class="aesthetic-windows-95-text-input" rows="15" cols="40" readonly="true" id="logTextArea">
             </textarea>
         </div>
     </div>
-  </body>
+    </body>
 </html>
