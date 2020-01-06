@@ -225,7 +225,7 @@ function nextDay(){
         weeklyEvent();
     }
     
-    GameData.godsSatisfaction -= Rules.GODS_SATISFACTION_DAILY_DROP;
+    GameData.godsSatisfaction -= Rules.GODS_SATISFACTION_DAILY_DROP * (GameData.godsSatisfaction / Rules.GODS_SATISFACTION_MAX);
 
     if(GameData.godsSatisfaction < Rules.GODS_SATISFACTION_LOWEST){
         GameData.godsSatisfaction = Rules.GODS_SATISFACTION_LOWEST;

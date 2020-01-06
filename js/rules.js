@@ -35,7 +35,7 @@ const Rules = {
     MAX_MONEY_FOR_EVERY_EVIL_WORD_IN_SPEECH : 10,
     EVIL_WORDS : ["evil", "satan", "domination", "curse", "kill", "demon", "cult", "bad", "villain", "empire", "hell", "follower", "mindless", "stupid", "devilish", "demonic",
                     "satanic", "killing", "slaughter", "hellish", ],
-    SPOOKY_EVENTS_OCCURENCE_TRESHOLD : 40,
+    SPOOKY_EVENTS_OCCURENCE_TRESHOLD : 45,
     SPAWN_RANDOM_NPC : 50,
     MAX_SPEECH_LENGTH : 600,
     MIN_SENTENCE_LENGTH : 1,

@@ -33,9 +33,14 @@ select{
 }
 .game{
     color: white;
+    overflow-x: hidden; 
+    overflow-y: scroll; 
+    -webkit-overflow-scrolling: touch;
+}
+
+.gradient-bg{    
     background: rgb(194,0,137);
     background: linear-gradient(90deg, rgba(194,0,137,1) 0%, rgba(120,9,121,1) 42%, rgba(0,212,255,1) 100%);
-    overflow-x: hidden; overflow-y: scroll; -webkit-overflow-scrolling: touch;
 }
 
 .punished{
