@@ -48,6 +48,10 @@ select{
     background: white;
 }
 
+.spooky{
+    background-color: white;
+}
+
 #credits{
     text-align: center;
 }
